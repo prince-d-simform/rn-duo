@@ -6,3 +6,4 @@ export * from './NavigationRoutes';
 export { default as RegexConst } from './RegexConst';
 export { default as Strings } from './Strings';
 export { default as ToolkitAction } from './ToolkitAction';
+export * from './StaticData';

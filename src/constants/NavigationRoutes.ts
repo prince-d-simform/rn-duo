@@ -5,7 +5,9 @@ export enum ROUTES {
   SignIn = 'SignIn',
   SignUp = 'SignUp',
   HomeTabs = 'HomeTabs',
-  Home = 'Home',
+  Explore = 'Explore',
+  Saved = 'Saved',
+  Trips = 'Trips',
   Profile = 'Profile',
   Details = 'Details'
 }

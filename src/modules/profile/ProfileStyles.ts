@@ -1,22 +1,40 @@
 import { StyleSheet } from 'react-native';
-import { Colors, width, type ThemeMode } from '../../theme';
+import { ApplicationStyles, Colors, scale, type ThemeMode } from '../../theme';
 
 /**
- * A StyleSheet object that contains all of the profile screen styles.
- * @param {ThemeMode} theme - The theme to use for the styles.
- * @returns {StyleSheet} A StyleSheet object containing all of the profile screen styles.
+ * Style function for the Profile screen.
+ * @param {ThemeMode} theme - Current theme mode.
+ * @returns StyleSheet object.
  */
-const styles = (theme: ThemeMode) =>
+const styleSheet = (theme: ThemeMode) =>
   StyleSheet.create({
-    logoutButton: {
-      alignSelf: 'center',
-      width: width * 0.5
+    ...ApplicationStyles(theme),
+    container: {
+      backgroundColor: Colors[theme]?.background,
+      flex: 1
     },
-    screenView: {
-      backgroundColor: Colors[theme]?.white,
-      flex: 1,
-      justifyContent: 'center'
+    content: {
+      paddingBottom: scale(24),
+      paddingHorizontal: scale(15)
+    },
+    section: {
+      marginTop: scale(15)
+    },
+    separator: {
+      backgroundColor: Colors[theme]?.border,
+      height: StyleSheet.hairlineWidth
+    },
+    signOutButton: {
+      height: scale(42),
+      marginTop: scale(15)
+    },
+    signOutTitle: {
+      fontSize: scale(14),
+      fontWeight: '700'
+    },
+    stats: {
+      marginTop: scale(16)
     }
   });
 
-export default styles;
+export default styleSheet;

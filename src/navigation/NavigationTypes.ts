@@ -7,7 +7,9 @@ import type { NavigatorScreenParams } from '@react-navigation/native';
  */
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type BottomTabParamList = {
-  [ROUTES.Home]: undefined;
+  [ROUTES.Explore]: undefined;
+  [ROUTES.Saved]: undefined;
+  [ROUTES.Trips]: undefined;
   [ROUTES.Profile]: undefined;
 };
 
@@ -21,7 +23,7 @@ export type RootStackParamList = {
   [ROUTES.SignIn]: SigninRouteParamList | undefined;
   [ROUTES.SignUp]: undefined;
   [ROUTES.HomeTabs]: NavigatorScreenParams<BottomTabParamList> | undefined;
-  [ROUTES.Details]: undefined;
+  [ROUTES.Details]: { destinationId: string };
 };
 
 declare global {

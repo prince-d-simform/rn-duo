@@ -61,4 +61,4 @@ const globalMetrics: GlobalMetricsType = {
   isWeb: Platform.OS === 'web'
 };
 
-export { globalMetrics, scale, width, height };
+export { globalMetrics, guidelineBaseWidth, scale, width, height };

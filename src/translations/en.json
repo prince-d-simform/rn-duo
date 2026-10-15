@@ -1,13 +1,20 @@
 {
-  "home": {
-    "title": "Home Screen",
-    "details": "Details",
-    "signIn": "Sign In",
-    "lightTheme": "Light Theme",
-    "darkTheme": "Dark Theme"
-  },
   "details": {
-    "title": "Details Screen"
+    "reviews": "{{total}} reviews",
+    "bestSeason": "Best {{season}}",
+    "topExperiences": "Top experiences",
+    "priceFromLabel": "from",
+    "nights_one": "{{count}} night",
+    "nights_other": "{{count}} nights",
+    "btnPlanTrip": "Plan trip",
+    "labelBack": "Go back",
+    "labelShare": "Share destination",
+    "labelSave": "Save destination",
+    "labelUnsave": "Remove from saved",
+    "labelPriceLevel": "Price level {{level}}",
+    "shareMessage": "Take a look at {{name}}, {{country}}: {{description}}",
+    "notFoundTitle": "Destination not found",
+    "notFoundMessage": "This destination is no longer available."
   },
   "apiError": {
     "clientError": "Invalid or incomplete data provided by the client.",
@@ -50,14 +57,67 @@
     "signInAction": "Sign In"
   },
   "profile": {
-    "title": "Profile",
-    "btnLogout": "Logout"
+    "memberSince": "Exploring since {{year}}",
+    "statCountries_one": "country",
+    "statCountries_other": "countries",
+    "statTrips_one": "trip",
+    "statTrips_other": "trips",
+    "statSaved": "saved",
+    "tripPreferences": "Trip preferences",
+    "notifications": "Notifications",
+    "currency": "Currency",
+    "units": "Units",
+    "helpAndFeedback": "Help and feedback",
+    "valueOn": "On",
+    "btnSignOut": "Sign out"
   },
   "navigation": {
-    "home": "Home",
+    "explore": "Explore",
+    "saved": "Saved",
+    "trips": "Trips",
     "profile": "Profile",
     "details": "Details",
     "signIn": "Sign In",
     "signUp": "Sign Up"
+  },
+  "explore": {
+    "title": "Where to next?",
+    "hintSearch": "Search destinations",
+    "categoryAll": "All",
+    "categoryBeaches": "Beaches",
+    "categoryMountains": "Mountains",
+    "categoryCities": "Cities",
+    "categoryIslands": "Islands",
+    "popularThisWeek": "Popular this week",
+    "weekendEscapes": "Weekend escapes",
+    "priceFrom": "{{country}} · from {{price}}",
+    "noResultsTitle": "No destinations found",
+    "noResultsMessage": "Try a different search or category.",
+    "labelAvatar": "Open profile",
+    "labelSaveDestination": "Save {{name}}",
+    "labelUnsaveDestination": "Remove {{name}} from saved",
+    "labelRating": "Rated {{rating}} out of 5",
+    "labelClearSearch": "Clear search",
+    "hintOpenDestination": "Opens destination details"
+  },
+  "saved": {
+    "title": "Saved",
+    "placeCount_one": "{{count}} place",
+    "placeCount_other": "{{count}} places",
+    "collectionCount_one": "{{count}} collection",
+    "collectionCount_other": "{{count}} collections",
+    "summary": "{{places}} · {{collections}}",
+    "allPlaces": "All places",
+    "emptyTitle": "No saved places yet",
+    "emptyMessage": "Tap the heart on any destination to keep it here."
+  },
+  "trips": {
+    "title": "Trips",
+    "plannedCount_one": "{{count}} planned trip",
+    "plannedCount_other": "{{count}} planned trips",
+    "someday": "Someday",
+    "hintOpenTrip": "Opens destination details",
+    "emptyTitle": "No trips planned",
+    "emptyMessage": "Your upcoming and past trips will show up here."
   }
 }

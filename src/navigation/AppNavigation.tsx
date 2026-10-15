@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
 import {
   DefaultTheme,
   NavigationContainer,
@@ -8,13 +7,13 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useMemo, type FC } from 'react';
-import { type ColorValue, Pressable, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { deepLinkPrefixes, ROUTES, Strings } from '../constants';
 import { useTheme } from '../hooks';
 import { DetailsScreen, SigninScreen, SignupScreen } from '../modules';
 import { AuthSelectors, useAppSelector } from '../redux';
-import { Colors, scale } from '../theme';
-import { navigateBack, navigationRef } from '../utils';
+import { Colors } from '../theme';
+import { navigationRef } from '../utils';
 import BottomTabNavigator from './BottomTabNavigator';
 import type { RootStackParamList } from './NavigationTypes';
 
@@ -30,29 +29,18 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       [ROUTES.SignIn]: 'signin',
       [ROUTES.SignUp]: 'signup',
-      [ROUTES.Details]: 'details',
+      [ROUTES.Details]: 'details/:destinationId',
       [ROUTES.HomeTabs]: {
         screens: {
-          [ROUTES.Home]: 'home',
+          [ROUTES.Explore]: 'explore',
+          [ROUTES.Saved]: 'saved',
+          [ROUTES.Trips]: 'trips',
           [ROUTES.Profile]: 'profile'
         }
       }
     }
   }
 };
-
-/**
- * The DetailsHeaderLeft Component
- * Renders a back chevron button for the Details screen navigation header.
- * @param {object} props - Component props.
- * @param {ColorValue} [props.tintColor] - The tint color applied to the icon.
- * @returns {React.ReactElement} A pressable back navigation button.
- */
-const DetailsHeaderLeft = ({ tintColor }: { tintColor?: ColorValue }): React.ReactElement => (
-  <Pressable hitSlop={8} onPress={navigateBack}>
-    <Ionicons name="chevron-back" size={scale(24)} color={tintColor} />
-  </Pressable>
-);
 
 /**
  * The RootNavigator Component
@@ -76,7 +64,7 @@ const RootNavigator: FC = (): React.ReactElement => {
           color: Colors[theme]?.black
         },
         contentStyle: {
-          backgroundColor: Colors[theme]?.white
+          backgroundColor: Colors[theme]?.background
         },
         navigationBarColor: Colors[theme]?.white
       }}
@@ -87,16 +75,7 @@ const RootNavigator: FC = (): React.ReactElement => {
           <Stack.Screen
             name={ROUTES.Details}
             component={DetailsScreen}
-            options={{
-              headerShown: true,
-              title: Strings.Navigation.details,
-              headerTitleAlign: 'center',
-              headerLeft: DetailsHeaderLeft,
-              headerTitleStyle: {
-                color: Colors[theme]?.black,
-                fontSize: scale(18)
-              }
-            }}
+            options={{ title: Strings.Navigation.details }}
           />
         </Stack.Group>
       ) : (
@@ -132,12 +111,12 @@ const AppNavigation: FC = (): React.ReactElement => {
       dark: isDark,
       colors: {
         ...DefaultTheme.colors,
-        primary: Colors[theme]?.black,
-        background: Colors[theme]?.white,
-        card: Colors[theme]?.white,
-        text: Colors[theme]?.black,
-        border: Colors[theme]?.black,
-        notification: Colors[theme]?.white
+        primary: Colors[theme]?.accent,
+        background: Colors[theme]?.background,
+        card: Colors[theme]?.surface,
+        text: Colors[theme]?.textPrimary,
+        border: Colors[theme]?.border,
+        notification: Colors[theme]?.accent
       }
     }),
     [theme, isDark]
@@ -156,7 +135,7 @@ const AppNavigation: FC = (): React.ReactElement => {
       onReady={handleReady}
     >
       <StatusBar
-        backgroundColor={Colors[theme]?.white}
+        backgroundColor={Colors[theme]?.background}
         barStyle={isDark ? 'light-content' : 'dark-content'}
       />
       <RootNavigator />

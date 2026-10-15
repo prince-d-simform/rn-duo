@@ -101,3 +101,72 @@ export function formatString(format: string, args: Record<string, any>): string 
 export const getErrorResponse = (errorMessage: string): ErrorResponse => {
   return { message: errorMessage };
 };
+
+/**
+ * Formats a date as a short header label, e.g. "Thursday 15 Oct".
+ * @param {Date} [date=new Date()] - The date to format.
+ * @returns {string} The formatted date label.
+ */
+export const formatHeaderDate = (date: Date = new Date()): string =>
+  date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' });
+
+/**
+ * Formats a number as a whole-dollar USD price, e.g. 420 → "$420".
+ * @param {number} amount - The amount in USD.
+ * @returns {string} The formatted price.
+ */
+export const formatPrice = (amount: number): string =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0
+  }).format(amount);
+
+/**
+ * Formats a rating with one decimal place, e.g. 5 → "5.0".
+ * @param {number} rating - The rating value.
+ * @returns {string} The formatted rating.
+ */
+export const formatRating = (rating: number): string => rating.toFixed(1);
+
+/**
+ * Returns up to two uppercase initials for a display name, e.g. "Alex Morgan" → "AM".
+ * @param {string} [name] - The display name.
+ * @returns {string} The initials, or an empty string when no name is available.
+ */
+export const getInitials = (name?: string): string =>
+  (name ?? '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part: string) => part.charAt(0).toUpperCase())
+    .join('');
+
+/**
+ * Formats an ISO date range compactly, e.g. "12–17 Jun 2027" or "28 Jun–3 Jul 2027".
+ * @param {string} startDate - Start date as an ISO date (YYYY-MM-DD).
+ * @param {string} endDate - End date as an ISO date (YYYY-MM-DD).
+ * @returns {string} The formatted date range.
+ */
+export const formatDateRange = (startDate: string, endDate: string): string => {
+  const start = new Date(`${startDate}T00:00:00Z`);
+  const end = new Date(`${endDate}T00:00:00Z`);
+  /**
+   * Formats a date in UTC with the given options.
+   * @param {Date} date - The date to format.
+   * @param {Intl.DateTimeFormatOptions} options - The format options.
+   * @returns {string} The formatted date.
+   */
+  const format = (date: Date, options: Intl.DateTimeFormatOptions): string =>
+    date.toLocaleDateString('en-GB', { timeZone: 'UTC', ...options });
+  const endLabel = format(end, { day: 'numeric', month: 'short', year: 'numeric' });
+
+  if (start.getUTCFullYear() !== end.getUTCFullYear()) {
+    return `${format(start, { day: 'numeric', month: 'short', year: 'numeric' })}–${endLabel}`;
+  }
+  if (start.getUTCMonth() !== end.getUTCMonth()) {
+    return `${format(start, { day: 'numeric', month: 'short' })}–${endLabel}`;
+  }
+  return `${start.getUTCDate()}–${endLabel}`;
+};

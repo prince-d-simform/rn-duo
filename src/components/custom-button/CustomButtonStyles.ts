@@ -11,6 +11,8 @@ import { type CustomButtonVariant } from './CustomButtonTypes';
  */
 export const getTextVariant = (buttonVariant: CustomButtonVariant): TextVariant => {
   switch (buttonVariant) {
+    case 'accent':
+    case 'danger':
     case 'outline':
     case 'solid':
       return 'title';
@@ -33,6 +35,10 @@ export const activityIndicatorColor = (
   theme: ThemeMode
 ): string => {
   switch (buttonVariant) {
+    case 'accent':
+      return Colors[theme]?.onAccent;
+    case 'danger':
+      return Colors[theme]?.danger;
     case 'outline':
       return Colors[theme]?.lightBlue;
     case 'solid':
@@ -53,6 +59,10 @@ export const activityIndicatorColor = (
  */
 export const textColor = (buttonVariant: CustomButtonVariant, theme: ThemeMode): string => {
   switch (buttonVariant) {
+    case 'accent':
+      return Colors[theme]?.onAccent;
+    case 'danger':
+      return Colors[theme]?.danger;
     case 'outline':
       return Colors[theme]?.lightBlue;
     case 'solid':
@@ -71,6 +81,18 @@ export const textColor = (buttonVariant: CustomButtonVariant, theme: ThemeMode):
  */
 export const buttonVariantStyles = (theme: ThemeMode) =>
   StyleSheet.create({
+    accent: {
+      backgroundColor: Colors[theme]?.accent,
+      borderColor: Colors[theme]?.accent,
+      borderRadius: scale(12),
+      borderWidth: 1
+    },
+    danger: {
+      backgroundColor: Colors[theme]?.surface,
+      borderColor: Colors[theme]?.border,
+      borderRadius: scale(15),
+      borderWidth: StyleSheet.hairlineWidth * 2
+    },
     hyperlink: {
       backgroundColor: Colors[theme]?.transparent,
       height: scale(24)

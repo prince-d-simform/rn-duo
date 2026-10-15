@@ -52,16 +52,16 @@ const YupError = freezeStringsObject({
   digitPasswordError: I18n.t('yupError:digitPasswordError')
 });
 
-const Home = freezeStringsObject({
-  homeScreenTitle: I18n.t('home:title'),
-  details: I18n.t('home:details'),
-  signIn: I18n.t('home:signIn'),
-  lightTheme: I18n.t('home:lightTheme'),
-  darkTheme: I18n.t('home:darkTheme')
-});
-
 const Details = freezeStringsObject({
-  detailsScreenTitle: I18n.t('details:title')
+  topExperiences: I18n.t('details:topExperiences'),
+  priceFromLabel: I18n.t('details:priceFromLabel'),
+  btnPlanTrip: I18n.t('details:btnPlanTrip'),
+  labelBack: I18n.t('details:labelBack'),
+  labelShare: I18n.t('details:labelShare'),
+  labelSave: I18n.t('details:labelSave'),
+  labelUnsave: I18n.t('details:labelUnsave'),
+  notFoundTitle: I18n.t('details:notFoundTitle'),
+  notFoundMessage: I18n.t('details:notFoundMessage')
 });
 
 const Auth = freezeStringsObject({
@@ -81,30 +81,72 @@ const Auth = freezeStringsObject({
 });
 
 const Profile = freezeStringsObject({
-  title: I18n.t('profile:title'),
-  btnLogout: I18n.t('profile:btnLogout')
+  tripPreferences: I18n.t('profile:tripPreferences'),
+  notifications: I18n.t('profile:notifications'),
+  currency: I18n.t('profile:currency'),
+  units: I18n.t('profile:units'),
+  helpAndFeedback: I18n.t('profile:helpAndFeedback'),
+  valueOn: I18n.t('profile:valueOn'),
+  statSaved: I18n.t('profile:statSaved'),
+  btnSignOut: I18n.t('profile:btnSignOut')
 });
 
 const Navigation = freezeStringsObject({
-  home: I18n.t('navigation:home'),
+  explore: I18n.t('navigation:explore'),
+  saved: I18n.t('navigation:saved'),
+  trips: I18n.t('navigation:trips'),
   profile: I18n.t('navigation:profile'),
   details: I18n.t('navigation:details'),
   signIn: I18n.t('navigation:signIn'),
   signUp: I18n.t('navigation:signUp')
 });
 
+const Explore = freezeStringsObject({
+  title: I18n.t('explore:title'),
+  hintSearch: I18n.t('explore:hintSearch'),
+  categoryAll: I18n.t('explore:categoryAll'),
+  categoryBeaches: I18n.t('explore:categoryBeaches'),
+  categoryMountains: I18n.t('explore:categoryMountains'),
+  categoryCities: I18n.t('explore:categoryCities'),
+  categoryIslands: I18n.t('explore:categoryIslands'),
+  popularThisWeek: I18n.t('explore:popularThisWeek'),
+  weekendEscapes: I18n.t('explore:weekendEscapes'),
+  noResultsTitle: I18n.t('explore:noResultsTitle'),
+  noResultsMessage: I18n.t('explore:noResultsMessage'),
+  labelAvatar: I18n.t('explore:labelAvatar'),
+  labelClearSearch: I18n.t('explore:labelClearSearch'),
+  hintOpenDestination: I18n.t('explore:hintOpenDestination')
+});
+
+const Saved = freezeStringsObject({
+  title: I18n.t('saved:title'),
+  allPlaces: I18n.t('saved:allPlaces'),
+  emptyTitle: I18n.t('saved:emptyTitle'),
+  emptyMessage: I18n.t('saved:emptyMessage')
+});
+
+const Trips = freezeStringsObject({
+  title: I18n.t('trips:title'),
+  someday: I18n.t('trips:someday'),
+  hintOpenTrip: I18n.t('trips:hintOpenTrip'),
+  emptyTitle: I18n.t('trips:emptyTitle'),
+  emptyMessage: I18n.t('trips:emptyMessage')
+});
+
 /**
  * Exporting all the strings in one object..
- * Separate string object like Home, Details & Auth etc...
+ * Separate string object like Explore, Details & Auth etc...
  * base on your modules dir structure
  * @type {Object.<string, Record<string, string>>}
  */
 export default Object.freeze({
   APIError,
   YupError,
-  Home,
   Details,
   Auth,
   Profile,
-  Navigation
+  Navigation,
+  Explore,
+  Saved,
+  Trips
 });
