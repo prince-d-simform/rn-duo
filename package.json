@@ -78,7 +78,7 @@
     "axios": "1.13.6",
     "expo": "57",
     "expo-asset": "57.0.7",
-    "expo-build-properties": "55.0.13",
+    "expo-build-properties": "57.0.22",
     "expo-constants": "57.0.7",
     "expo-font": "57.0.1",
     "expo-linking": "57.0.4",
