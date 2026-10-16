@@ -45,7 +45,8 @@ export const exploreCategories: CategoryOption[] = [
   { id: DestinationCategory.Beaches, label: Strings.Explore.categoryBeaches },
   { id: DestinationCategory.Mountains, label: Strings.Explore.categoryMountains },
   { id: DestinationCategory.Cities, label: Strings.Explore.categoryCities },
-  { id: DestinationCategory.Islands, label: Strings.Explore.categoryIslands }
+  { id: DestinationCategory.Islands, label: Strings.Explore.categoryIslands },
+  { id: DestinationCategory.Village, label: 'Village' }
 ];
 
 /**

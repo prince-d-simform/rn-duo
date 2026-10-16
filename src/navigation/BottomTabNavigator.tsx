@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { type FC } from 'react';
 import { type ColorValue } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ROUTES, Strings } from '../constants';
 import { useTheme } from '../hooks';
 import { ExploreScreen, ProfileScreen, SavedScreen, TripsScreen } from '../modules';
@@ -48,6 +49,7 @@ const ProfileTabIcon = createTabIcon('person-outline');
  */
 const BottomTabNavigator: FC = (): React.ReactElement => {
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tab.Navigator
@@ -58,11 +60,17 @@ const BottomTabNavigator: FC = (): React.ReactElement => {
         },
         tabBarActiveTintColor: Colors[theme]?.accent,
         tabBarInactiveTintColor: Colors[theme]?.textTertiary,
+        // Keep labels under the icons on wide windows too (e.g. iPhone Duo unfolded),
+        // where React Navigation would otherwise switch to a short side-by-side bar.
+        tabBarLabelPosition: 'below-icon',
         tabBarStyle: {
           backgroundColor: Colors[theme]?.surface,
           borderTopColor: Colors[theme]?.border,
+          // Explicit height so the bar always fits the scaled icon and label.
+          height: scale(40) + insets.bottom,
           paddingTop: scale(6)
         },
+        tabBarIconSize: scale(25),
         tabBarLabelStyle: {
           fontSize: scale(11),
           fontWeight: '500'
