@@ -1,9 +1,10 @@
-import React, { memo, useCallback } from 'react';
-import { FlatList, Text, View, type ListRenderItemInfo } from 'react-native';
+import React, { memo, useCallback, useMemo } from 'react';
+import { FlatList, Text, View, type ListRenderItemInfo, type ViewStyle } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   ChipGroup,
-  DESTINATION_CARD_WIDTH,
   DestinationCard,
+  getDestinationCardWidth,
   SearchBar
 } from '../../../../components';
 import { exploreCategories, Strings } from '../../../../constants';
@@ -50,6 +51,14 @@ const ExploreListHeader: React.FC<ExploreListHeaderProps> = (props) => {
     testID = ExploreListHeaderDefaultProps.testID!
   } = props;
   const { styles } = useTheme(styleSheet);
+  const insets = useSafeAreaInsets();
+
+  // Keep the header and search clear of side insets, e.g. the vertical status bar
+  // on the right edge of iPhone Duo's inner display.
+  const sideInsetStyle = useMemo<ViewStyle>(
+    () => ({ marginLeft: insets.left, marginRight: insets.right }),
+    [insets.left, insets.right]
+  );
 
   const renderPopularItem = useCallback(
     ({ item }: ListRenderItemInfo<Destination>) => (
@@ -75,13 +84,14 @@ const ExploreListHeader: React.FC<ExploreListHeaderProps> = (props) => {
         dateLabel={dateLabel}
         title={Strings.Explore.title}
         initials={initials}
+        customStyle={sideInsetStyle}
         onAvatarPress={onAvatarPress}
       />
       <SearchBar
         value={searchQuery}
         placeholder={Strings.Explore.hintSearch}
         clearAccessibilityLabel={Strings.Explore.labelClearSearch}
-        customStyle={styles.search}
+        customStyle={[styles.search, sideInsetStyle]}
         testID="explore-search"
         onChangeText={onChangeSearch}
         onClear={onClearSearch}
@@ -105,7 +115,7 @@ const ExploreListHeader: React.FC<ExploreListHeaderProps> = (props) => {
             keyExtractor={keyExtractor}
             ItemSeparatorComponent={renderCarouselSeparator}
             showsHorizontalScrollIndicator={false}
-            snapToInterval={DESTINATION_CARD_WIDTH + CAROUSEL_ITEM_SPACING}
+            snapToInterval={getDestinationCardWidth() + CAROUSEL_ITEM_SPACING}
             decelerationRate="fast"
             testID="explore-popular-list"
           />
