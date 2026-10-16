@@ -10,7 +10,7 @@ import React, { useCallback, useMemo, type FC } from 'react';
 import { StatusBar } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { deepLinkPrefixes, ROUTES, Strings } from '../constants';
-import { useTheme } from '../hooks';
+import { useAppState, useTheme } from '../hooks';
 import { DetailsScreen, SigninScreen, SignupScreen } from '../modules';
 import { AuthSelectors, useAppSelector } from '../redux';
 import { Colors } from '../theme';
@@ -105,6 +105,8 @@ const RootNavigator: FC = (): React.ReactElement => {
  */
 const AppNavigation: FC = (): React.ReactElement => {
   const { theme, isDark } = useTheme();
+  // Logs active ⇄ inactive ⇄ background transitions (demo: Split View on iPhone Duo).
+  useAppState();
 
   const navTheme: Theme = useMemo(
     () => ({

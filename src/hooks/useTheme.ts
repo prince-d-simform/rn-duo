@@ -27,6 +27,7 @@ const useTheme = <T>(
   const theme: ColorSchemeName = useColorScheme();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   // Keep Metrics current before any style or scale() value is computed this render.
+  console.log('useTheme.ts windowWidth ----', windowWidth, windowHeight);
   updateMetrics({ width: windowWidth, height: windowHeight });
   const [themeMode, setThemeMode] = useMMKVString(MMKVKeys.themeMode);
   const currentThemeMode = useMemo<ThemeMode>(
