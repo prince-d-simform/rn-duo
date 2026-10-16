@@ -28,7 +28,16 @@ const DetailsHero: React.FC<DetailsHeroProps> = (props) => {
   const { styles } = useTheme(styleSheet);
   const insets = useSafeAreaInsets();
 
-  const actionsPosition = useMemo<ViewStyle>(() => ({ top: insets.top + scale(26) }), [insets.top]);
+  // Offset by each side's inset so the buttons clear the status bar and camera,
+  // which sit on the side on iPhone Duo's inner display.
+  const actionsPosition = useMemo<ViewStyle>(
+    () => ({
+      top: insets.top || scale(26),
+      left: scale(14) + insets.left,
+      right: scale(14) + insets.right
+    }),
+    [insets.top, insets.left, insets.right]
+  );
 
   return (
     <View style={[styles.hero, customStyle]} testID={testID}>

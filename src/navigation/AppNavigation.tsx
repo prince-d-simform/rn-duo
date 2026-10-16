@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useMemo, type FC } from 'react';
 import { StatusBar } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { deepLinkPrefixes, ROUTES, Strings } from '../constants';
 import { useTheme } from '../hooks';
 import { DetailsScreen, SigninScreen, SignupScreen } from '../modules';
@@ -127,6 +128,8 @@ const AppNavigation: FC = (): React.ReactElement => {
     SplashScreen.hideAsync();
   }, []);
 
+  const insets = useSafeAreaInsets();
+  console.log('AppNavigation.tsx insets ----', insets);
   return (
     <NavigationContainer
       ref={navigationRef}
