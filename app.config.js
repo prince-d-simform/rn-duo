@@ -70,7 +70,10 @@ const defineConfig = ({ config }) => {
             extraProguardRules: defineProGuardRules(bundleIdentifier)
           },
           ios: {
-            deploymentTarget: '16.4'
+            deploymentTarget: '16.4',
+            // Required to launch when built with the iOS 27 SDK (UIScene lifecycle).
+            // SDK 57 only: remove when upgrading to SDK 58, where it is the default.
+            enableSceneSupport: true
           }
         }
       ],
