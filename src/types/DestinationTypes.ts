@@ -7,7 +7,8 @@ export enum DestinationCategory {
   Beaches = 'beaches',
   Mountains = 'mountains',
   Cities = 'cities',
-  Islands = 'islands'
+  Islands = 'islands',
+  Village = 'village'
 }
 
 /**

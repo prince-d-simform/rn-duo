@@ -16,11 +16,12 @@ const DESIGN_CARD_HEIGHT: number = 186;
 
 /**
  * Card width as the same share of the window width as in the design
- * (140pt of 375pt), e.g. 150pt on a 402pt-wide phone.
+ * (140pt of 375pt), e.g. 150pt on a 402pt-wide phone. Read at render time,
+ * since the window width can change.
+ * @returns {number} The card width.
  */
-export const DESTINATION_CARD_WIDTH: number = Math.round(
-  (width * DESIGN_CARD_WIDTH) / guidelineBaseWidth
-);
+export const getDestinationCardWidth = (): number =>
+  Math.round((width * DESIGN_CARD_WIDTH) / guidelineBaseWidth);
 
 /**
  * Style function for the DestinationCard component.
@@ -34,7 +35,7 @@ const styleSheet = (theme: ThemeMode) =>
       aspectRatio: DESIGN_CARD_WIDTH / DESIGN_CARD_HEIGHT,
       borderRadius: scale(13),
       overflow: 'hidden',
-      width: DESTINATION_CARD_WIDTH
+      width: getDestinationCardWidth()
     },
     country: {
       color: Colors[theme]?.onMediaMuted,

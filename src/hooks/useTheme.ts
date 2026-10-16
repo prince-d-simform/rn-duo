@@ -1,12 +1,14 @@
 import _ from 'lodash';
 import { useCallback, useMemo } from 'react';
-import { useColorScheme, type ColorSchemeName } from 'react-native';
+import { useColorScheme, useWindowDimensions, type ColorSchemeName } from 'react-native';
 import { useMMKVString } from 'react-native-mmkv';
 import { MMKVKeys } from '../constants';
-import { ThemeModeEnum, type ThemeMode } from '../theme';
+import { ThemeModeEnum, updateMetrics, type ThemeMode } from '../theme';
 
 /**
  * A theme hook that returns the current theme and whether it is dark.
+ * It also keeps the shared Metrics (`width`, `height`, `scale`) in sync with the
+ * window size and rebuilds the styles when the window is resized.
  * @param {(theme: ThemeMode) => T} styleSheetFn? - A function that returns a style sheet for the theme.
  * @returns An object with the following properties:
  * - isDark: boolean - flag for whether the theme is dark or not.
@@ -23,6 +25,9 @@ const useTheme = <T>(
   changeTheme: (value: ThemeMode) => void;
 } => {
   const theme: ColorSchemeName = useColorScheme();
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  // Keep Metrics current before any style or scale() value is computed this render.
+  updateMetrics({ width: windowWidth, height: windowHeight });
   const [themeMode, setThemeMode] = useMMKVString(MMKVKeys.themeMode);
   const currentThemeMode = useMemo<ThemeMode>(
     () =>
@@ -37,7 +42,8 @@ const useTheme = <T>(
   );
   const styles = useMemo<T>(
     () => (styleSheetFn?.(currentThemeMode, isDark) ?? {}) as T,
-    [styleSheetFn, currentThemeMode, isDark]
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- rebuild when Metrics change
+    [styleSheetFn, currentThemeMode, isDark, windowWidth, windowHeight]
   );
   const changeTheme = useCallback<(value: ThemeMode) => void>(
     (value: ThemeMode) => {

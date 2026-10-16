@@ -24,11 +24,15 @@ describe('ProfileScreen', () => {
   });
 
   it('signs the user out', () => {
+    // CustomButton debounces presses with a timer
+    jest.useFakeTimers();
     const { getByTestId, store } = RenderWrapper(<ProfileScreen />);
     store.dispatch(AuthActions.setLoggedIn(true));
 
     fireEvent.press(getByTestId('profile-sign-out'));
 
     expect(store.getState().auth.isLoggedIn).toBe(false);
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
   });
 });
